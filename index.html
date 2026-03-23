@@ -1,265 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freelancer Portfolio</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body{
-  background:#0f172a;
-  color:white;
-  transition:0.3s;
-}
-
-.light{
-  background:#f5f5f5;
-  color:#111;
-}
-
-/* NAVBAR */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:20px 10%;
-  position:sticky;
-  top:0;
-  background:#0f172a;
-}
-
-nav a{
-  color:white;
-  text-decoration:none;
-  margin:0 10px;
-}
-
-.toggle-btn{
-  cursor:pointer;
-  background:#22c55e;
-  padding:6px 10px;
-  border-radius:5px;
-}
-
-/* HERO */
-.hero{
-  height:90vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:48px;
-}
-
-.hero span{
-  color:#22c55e;
-}
-
-.btn{
-  margin-top:20px;
-  padding:12px 25px;
-  background:#22c55e;
-  border:none;
-  cursor:pointer;
-  border-radius:5px;
-}
-
-/* SECTION */
-section{
-  padding:60px 10%;
-}
-
-/* SERVICES */
-.services{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:#1e293b;
-  padding:20px;
-  border-radius:10px;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-/* PORTFOLIO */
-.portfolio{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.portfolio img{
-  width:100%;
-  border-radius:10px;
-}
-
-/* SKILLS */
-.skills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.skill{
-  background:#22c55e;
-  padding:8px 12px;
-  border-radius:5px;
-}
-
-/* TESTIMONIAL */
-.testimonial{
-  background:#1e293b;
-  padding:20px;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-/* CONTACT */
-form{
-  display:flex;
-  flex-direction:column;
-}
-
-input,textarea{
-  margin:10px 0;
-  padding:10px;
-  border:none;
-  border-radius:5px;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  background:#020617;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero h1{
-    font-size:30px;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreelanceHub - Find Perfect Freelance Talent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+    .btn-primary { background: #6366f1; color: white; padding: 12px 28px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
+    .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(99,102,241,0.35); }
+    .tag { background: #f1f5f9; color: #475569; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+    .star { color: #f59e0b; }
+    .badge { background: rgba(99,102,241,0.1); color: #6366f1; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 20px rgba(0,0,0,0.05); }
+    .section-title { font-size: 2rem; font-weight: 800; color: #0f172a; }
+    .section-sub { color: #64748b; margin-top: 8px; }
+    .input-style { border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; font-size: 15px; width: 100%; outline: none; transition: border 0.2s; }
+    .input-style:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .page { display: none; }
+    .page.active { display: block; }
+    .gig-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px 12px 0 0; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .avatar-lg { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+    .footer-bg { background: #0f172a; color: #94a3b8; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #f1f5f9; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .category-card:hover { border-color: #6366f1; background: #f5f3ff; }
+    .category-card { border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: white; }
+    .nav-link { color: #64748b; font-weight: 500; cursor: pointer; transition: color 0.2s; padding: 6px 0; }
+    .nav-link:hover, .nav-link.active { color: #6366f1; }
+    .spinner { display: inline-block; width: 40px; height: 40px; border: 4px solid #e2e8f0; border-top-color: #6366f1; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .toast { position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: white; padding: 14px 20px; border-radius: 12px; z-index: 9999; box-shadow: 0 8px 30px rgba(0,0,0,0.3); animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .filter-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid #e2e8f0; background: white; color: #475569; transition: all 0.15s; }
+    .filter-btn:hover, .filter-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#6366f1', secondary: '#8b5cf6' }
+        }
+      }
+    }
+  </script>
 </head>
-
-<body>
+<body class="bg-gray-50">
 
 <!-- NAVBAR -->
-<nav>
-  <h2>MyPortfolio</h2>
-  <div>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Work</a>
-    <a href="#contact">Contact</a>
-    <span class="toggle-btn" onclick="toggleMode()">🌙</span>
+<nav class="navbar" id="navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+    <div onclick="showPage('home')" class="flex items-center gap-2 cursor-pointer">
+      <div style="background:linear-gradient(135deg,#6366f1,#8b5cf6);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:white;font-size:18px;">💼</span>
+      </div>
+      <span style="font-size:1.3rem;font-weight:800;color:#0f172a;">Freelance<span style="color:#6366f1;">Hub</span></span>
+    </div>
+    <div class="hidden sm:flex items-center gap-8">
+      <span class="nav-link" id="nav-home" onclick="showPage('home')">Home</span>
+      <span class="nav-link" id="nav-browse" onclick="showPage('browse')">Browse</span>
+      <span class="nav-link" id="nav-how" onclick="showPage('how')">How It Works</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="showToast('Sign In آ رہا ہے جلد!')" style="color:#6366f1;font-weight:600;background:none;border:none;cursor:pointer;font-size:14px;">Sign In</button>
+      <button class="btn-primary" style="padding:8px 20px;font-size:14px;" onclick="showToast('Sign Up آ رہا ہے جلد!')">Join Now</button>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <h1>Hi, I'm <span>Freelancer</span></h1>
-  <p>I build modern websites & digital experiences</p>
-  <button class="btn">Hire Me</button>
+<!-- TOAST -->
+<div class="toast" id="toast" style="display:none;"></div>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div class="page active" id="page-home">
+  <!-- Hero -->
+  <section style="padding-top:100px;padding-bottom:80px;background:linear-gradient(160deg,#f8f4ff 0%,#eef2ff 50%,#f0fdf4 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="badge inline-flex mb-4">⚡ 50,000+ Projects Completed</div>
+        <h1 style="font-size:3.5rem;font-weight:900;line-height:1.1;color:#0f172a;margin-bottom:20px;">
+          Find the perfect<br>
+          <span style="background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">freelance talent</span><br>
+          for your project.
+        </h1>
+        <p style="font-size:1.15rem;color:#64748b;margin-bottom:32px;max-width:520px;">
+          Connect with top-rated professionals for design, development, marketing, and more. Scale your team instantly.
+        </p>
+        <div style="display:flex;gap:12px;max-width:600px;background:white;border-radius:16px;padding:8px;box-shadow:0 4px 30px rgba(0,0,0,0.08);border:1px solid #e2e8f0;">
+          <input id="hero-search" class="input-style" style="border:none;flex:1;padding:10px 16px;" placeholder="What service are you looking for?" />
+          <button class="btn-primary" onclick="doSearch()">🔍 Search</button>
+        </div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <span style="color:#94a3b8;font-size:13px;font-weight:500;">Popular:</span>
+          <span onclick="quickSearch('Web Design')" class="tag" style="cursor:pointer;">Web Design</span>
+          <span onclick="quickSearch('Logo Design')" class="tag" style="cursor:pointer;">Logo Design</span>
+          <span onclick="quickSearch('WordPress')" class="tag" style="cursor:pointer;">WordPress</span>
+          <span onclick="quickSearch('Mobile App')" class="tag" style="cursor:pointer;">Mobile App</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="background:white;border-bottom:1px solid #f1f5f9;padding:28px 0;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;">
+        <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">50K+</div><div style="color:#64748b;font-size:13px;">Projects Done</div></div>
+        <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">12K+</div><div style="color:#64748b;font-size:13px;">Freelancers</div></div>
+        <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">4.9★</div><div style="color:#64748b;font-size:13px;">Avg Rating</div></div>
+        <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">98%</div><div style="color:#64748b;font-size:13px;">Satisfaction</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section style="padding:80px 0;background:#fafafa;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-title">Browse by Category</h2>
+        <p class="section-sub">Find experts across specialized domains</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;" id="categories-grid"></div>
+    </div>
+  </section>
+
+  <!-- Featured Gigs -->
+  <section style="padding:80px 0;background:white;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
+        <div>
+          <h2 class="section-title">Featured Services</h2>
+          <p class="section-sub">Highly rated gigs from our top talent</p>
+        </div>
+        <button onclick="showPage('browse')" style="color:#6366f1;font-weight:600;background:none;border:none;cursor:pointer;">View All →</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;" id="featured-gigs"></div>
+    </div>
+  </section>
+
+  <!-- How It Works Strip -->
+  <section style="padding:80px 0;background:linear-gradient(135deg,#0f172a,#1e1b4b);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="text-align:center;margin-bottom:56px;">
+        <h2 style="font-size:2rem;font-weight:800;color:white;">How FreelanceHub Works</h2>
+        <p style="color:#94a3b8;margin-top:8px;">Simple, fast, and secure.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;">
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">🔍</div>
+          <h3 style="color:white;font-size:1.2rem;font-weight:700;margin-bottom:10px;">1. Discover</h3>
+          <p style="color:#94a3b8;line-height:1.6;">Browse thousands of professional services or post your project to receive bids from top freelancers.</p>
+        </div>
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">💳</div>
+          <h3 style="color:white;font-size:1.2rem;font-weight:700;margin-bottom:10px;">2. Hire Safely</h3>
+          <p style="color:#94a3b8;line-height:1.6;">Compare profiles, check reviews, and hire the best fit. Pay securely through our escrow system.</p>
+        </div>
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">✅</div>
+          <h3 style="color:white;font-size:1.2rem;font-weight:700;margin-bottom:10px;">3. Approve & Pay</h3>
+          <p style="color:#94a3b8;line-height:1.6;">Collaborate, review the work, and release payment only when you are 100% satisfied.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Freelancers -->
+  <section style="padding:80px 0;background:#fafafa;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-title">Top Rated Freelancers</h2>
+        <p class="section-sub">Work with the best in the industry</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;" id="top-freelancers"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section style="padding:80px 0;background:white;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-sub">Real reviews from real people</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" id="testimonials-grid"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:80px 0;background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 style="font-size:2.5rem;font-weight:800;color:white;margin-bottom:16px;">Ready to start your next project?</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:40px;">Join thousands of businesses finding success with FreelanceHub.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" style="background:white;color:#6366f1;font-size:1rem;padding:14px 36px;" onclick="showPage('browse')">Find Talent Now</button>
+        <button onclick="showToast('Freelancer registration آ رہا ہے!')" style="background:rgba(255,255,255,0.15);color:white;border:2px solid rgba(255,255,255,0.3);padding:14px 36px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;">Become a Freelancer</button>
+      </div>
+    </div>
+  </section>
 </div>
 
-<!-- SERVICES -->
-<section id="services">
-  <h2>My Services</h2>
-  <div class="services">
-    <div class="card">
-      <h3>Web Design</h3>
-      <p>Modern UI/UX design for websites</p>
+<!-- ===================== BROWSE PAGE ===================== -->
+<div class="page" id="page-browse">
+  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <h1 class="section-title" style="margin-bottom:8px;">Explore Services</h1>
+      <p class="section-sub" style="margin-bottom:28px;">Find the perfect freelancer for your project</p>
+
+      <!-- Search + Sort -->
+      <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
+        <input id="browse-search" class="input-style" style="flex:1;min-width:260px;" placeholder="Search services..." oninput="filterGigs()" />
+        <select id="browse-sort" onchange="filterGigs()" style="border:1px solid #e2e8f0;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:500;outline:none;background:white;cursor:pointer;">
+          <option value="rating">⭐ Top Rated</option>
+          <option value="price_asc">💰 Price: Low to High</option>
+          <option value="price_desc">💎 Price: High to Low</option>
+          <option value="newest">🆕 Newest</option>
+        </select>
+      </div>
+
+      <!-- Category Filters -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;" id="category-filters"></div>
+
+      <div style="display:flex;gap:28px;">
+        <!-- Sidebar -->
+        <aside style="width:220px;flex-shrink:0;">
+          <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px;">
+            <h3 style="font-weight:700;margin-bottom:16px;color:#0f172a;">💰 Budget</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input id="min-price" type="number" placeholder="Min $" class="input-style" style="padding:8px 12px;font-size:13px;" oninput="filterGigs()" />
+              <span style="color:#94a3b8;">-</span>
+              <input id="max-price" type="number" placeholder="Max $" class="input-style" style="padding:8px 12px;font-size:13px;" oninput="filterGigs()" />
+            </div>
+            <button onclick="clearFilters()" style="margin-top:16px;width:100%;padding:8px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;color:#64748b;cursor:pointer;background:white;">🗑 Clear Filters</button>
+          </div>
+        </aside>
+
+        <!-- Results -->
+        <div style="flex:1;">
+          <div id="gigs-count" style="color:#64748b;font-size:14px;margin-bottom:16px;"></div>
+          <div id="browse-gigs" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;"></div>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Development</h3>
-      <p>Responsive website development</p>
-    </div>
-    <div class="card">
-      <h3>SEO</h3>
-      <p>Improve your Google ranking</p>
-    </div>
   </div>
-</section>
+</div>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2>My Work</h2>
-  <div class="portfolio">
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
-    <img src="https://via.placeholder.com/300">
-  </div>
-</section>
+<!-- ===================== GIG DETAIL PAGE ===================== -->
+<div class="page" id="page-gig">
+  <div style="padding-top:90px;min-height:100vh;" id="gig-detail-content"></div>
+</div>
 
-<!-- SKILLS -->
-<section>
-  <h2>Skills</h2>
-  <div class="skills">
-    <div class="skill">HTML</div>
-    <div class="skill">CSS</div>
-    <div class="skill">JavaScript</div>
-    <div class="skill">WordPress</div>
-  </div>
-</section>
+<!-- ===================== FREELANCER PROFILE PAGE ===================== -->
+<div class="page" id="page-freelancer">
+  <div style="padding-top:80px;min-height:100vh;" id="freelancer-content"></div>
+</div>
 
-<!-- TESTIMONIAL -->
-<section>
-  <h2>Testimonials</h2>
-  <div class="testimonial">
-    <p>"Amazing work! Highly recommended."</p>
-  </div>
-  <div class="testimonial">
-    <p>"Very professional and fast delivery."</p>
-  </div>
-</section>
+<!-- ===================== HOW IT WORKS PAGE ===================== -->
+<div class="page" id="page-how">
+  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">
+    <section style="background:linear-gradient(135deg,#f5f3ff,#eef2ff);padding:80px 24px;text-align:center;border-bottom:1px solid #e2e8f0;">
+      <h1 style="font-size:2.8rem;font-weight:900;color:#0f172a;margin-bottom:16px;">How FreelanceHub Works</h1>
+      <p style="color:#64748b;font-size:1.1rem;max-width:560px;margin:0 auto;">Whether you need a logo, a website, or a video — we make it easy to get world-class work done.</p>
+    </section>
 
-<!-- ABOUT -->
-<section>
-  <h2>About Me</h2>
-  <p>I am a professional freelancer with experience in web development and design.</p>
-</section>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-20">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:60px;">
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:20px;">🔍</div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:#0f172a;margin-bottom:12px;">1. Post Your Project</h3>
+          <p style="color:#64748b;line-height:1.7;">Tell us what you need. Browse our catalog of services or post a custom project and let freelancers come to you.</p>
+        </div>
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:20px;">🤝</div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:#0f172a;margin-bottom:12px;">2. Choose Your Expert</h3>
+          <p style="color:#64748b;line-height:1.7;">Review profiles, portfolios, and verified reviews. Interview your top picks and choose the perfect match.</p>
+        </div>
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:20px;">💎</div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:#0f172a;margin-bottom:12px;">3. Pay When Satisfied</h3>
+          <p style="color:#64748b;line-height:1.7;">Your payment is held securely in escrow. Release it only when the work meets your exact expectations.</p>
+        </div>
+      </div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact Me</h2>
-  <form>
-    <input type="text" placeholder="Your Name">
-    <input type="email" placeholder="Email">
-    <textarea placeholder="Message"></textarea>
-    <button class="btn">Send Message</button>
-  </form>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Freelancer | All Rights Reserved</p>
-</footer>
-
-<script>
-function toggleMode(){
-  document.body.classList.toggle("light");
-}
-</script>
-
-</body>
-  </html>
+      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:24px;padding:56px;text-align:center;color:white;">
+        <h2 style="font-size:2rem;font-weight:800;margin-bottom:16px;">🛡️ Your Safety is Our Priority</h2>
+        <p style="color:#94a3b8;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;">We provide a secure, transparent environment for both clients and freelancers.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:600px;margin:0 auto;">
+          <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:2rem;margin-bottom:12px;">🔒</div>
+            <h4 style="font-weight:700;margin-bottom:8px;">Secure Payments</h4>
+            <p style="color:#94a3b8;font-size:14px;">Funds held in escrow. Released only after your approval.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">
+            <d
