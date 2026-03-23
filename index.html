@@ -1,233 +1,389 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8" />  
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-<title>FreelanceHub - Find Perfect Talent</title>  
-<script src="https://cdn.tailwindcss.com"></script>  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>  
-<style>  
-  *{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0;}  
-  body{background:#f8fafc;}  
-  .page{display:none;}  
-  .page.active{display:block;}  
-  .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;box-shadow:0 1px 20px rgba(0,0,0,0.06);}  
-  .btn-primary{background:#6366f1;color:white;padding:11px 26px;border-radius:12px;font-weight:700;border:none;cursor:pointer;font-size:14px;transition:all .2s;}  
-  .btn-primary:hover{background:#4f46e5;transform:translateY(-1px);box-shadow:0 8px 20px rgba(99,102,241,0.35);}  
-  .card{background:white;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer;}  
-  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12);}  
-  .tag{background:#f1f5f9;color:#475569;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;display:inline-block;}  
-  .input-field{border:1px solid #e2e8f0;border-radius:12px;padding:11px 16px;font-size:15px;width:100%;outline:none;transition:border .2s;background:white;}  
-  .input-field:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}  
-  .cat-card{background:white;border:2px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;}  
-  .cat-card:hover{border-color:#6366f1;background:#f5f3ff;transform:translateY(-3px);}  
-  .filter-btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569;transition:all .15s;}  
-  .filter-btn:hover,.filter-btn.active-btn{background:#6366f1;color:white;border-color:#6366f1;}  
-  .toast-box{position:fixed;bottom:24px;right:24px;background:#0f172a;color:white;padding:14px 22px;border-radius:12px;z-index:9999;box-shadow:0 8px 30px rgba(0,0,0,0.3);display:none;font-size:14px;font-weight:500;}  
-  .star-filled{color:#f59e0b;}  
-  .section-heading{font-size:2rem;font-weight:800;color:#0f172a;}  
-  .section-sub{color:#64748b;margin-top:8px;font-size:1rem;}  
-  .nav-link{color:#64748b;font-weight:600;font-size:14px;cursor:pointer;padding:6px 4px;border:none;background:none;transition:color .2s;}  
-  .nav-link:hover{color:#6366f1;}  
-  .back-link{color:#6366f1;font-size:14px;cursor:pointer;font-weight:600;background:none;border:none;padding:0;margin-bottom:20px;display:inline-flex;align-items:center;gap:4px;}  
-  .back-link:hover{text-decoration:underline;}  
-</style>  
-</head>  
-<body>  <!-- NAVBAR -->  <nav class="navbar">  
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">  
-    <div onclick="goHome()" style="display:flex;align-items:center;gap:10px;cursor:pointer;">  
-      <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">💼</div>  
-      <span style="font-size:1.3rem;font-weight:800;color:#0f172a;">Freelance<span style="color:#6366f1;">Hub</span></span>  
-    </div>  
-    <div style="display:flex;align-items:center;gap:24px;">  
-      <button class="nav-link" onclick="goHome()">Home</button>  
-      <button class="nav-link" onclick="goBrowse()">Browse</button>  
-      <button class="nav-link" onclick="goHow()">How It Works</button>  
-    </div>  
-    <div style="display:flex;align-items:center;gap:12px;">  
-      <button onclick="toast('Sign In جلد آئے گا!')" style="color:#6366f1;font-weight:700;background:none;border:none;cursor:pointer;font-size:14px;">Sign In</button>  
-      <button class="btn-primary" onclick="toast('Sign Up جلد آئے گا!')">Join Now</button>  
-    </div>  
-  </div>  
-</nav>  <!-- TOAST -->  <div class="toast-box" id="toast-box"></div>  <!-- ===== HOME PAGE ===== -->  <div class="page active" id="pg-home">    <!-- Hero -->    <section style="padding-top:90px;padding-bottom:80px;background:linear-gradient(160deg,#f0f4ff,#faf0ff,#f0fdf4);">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-      <div style="background:#ede9fe;color:#6366f1;display:inline-block;padding:6px 16px;border-radius:20px;font-weight:700;font-size:13px;margin-bottom:20px;">⚡ 50,000+ Projects Completed</div>  
-      <h1 style="font-size:3.5rem;font-weight:900;line-height:1.1;color:#0f172a;margin-bottom:20px;max-width:700px;">  
-        Find the perfect<br>  
-        <span style="background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">freelance talent</span><br>  
-        for your project.  
-      </h1>  
-      <p style="font-size:1.1rem;color:#64748b;margin-bottom:32px;max-width:520px;line-height:1.7;">Connect with top-rated professionals for design, development, marketing, and more.</p>  <div style="display:flex;gap:10px;max-width:580px;background:white;border-radius:16px;padding:8px;box-shadow:0 4px 30px rgba(0,0,0,0.08);border:1px solid #e2e8f0;margin-bottom:20px;">  
-    <input id="hero-q" class="input-field" style="border:none;flex:1;padding:10px 14px;font-size:15px;" placeholder="What service are you looking for?"/>  
-    <button class="btn-primary" onclick="heroSearch()">🔍 Search</button>  
-  </div>  
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">  
-    <span style="color:#94a3b8;font-size:13px;font-weight:600;">Popular:</span>  
-    <span class="tag" onclick="quickSearch('Web Design')" style="cursor:pointer;">Web Design</span>  
-    <span class="tag" onclick="quickSearch('Logo Design')" style="cursor:pointer;">Logo Design</span>  
-    <span class="tag" onclick="quickSearch('Mobile App')" style="cursor:pointer;">Mobile App</span>  
-    <span class="tag" onclick="quickSearch('WordPress')" style="cursor:pointer;">WordPress</span>  
-  </div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FreelanceHub - Find Perfect Talent</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0;}
+  body{background:#f8fafc;}
+  .page{display:none;}
+  .page.active{display:block;}
+  .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;box-shadow:0 1px 20px rgba(0,0,0,0.06);}
+  .btn-primary{background:#6366f1;color:white;padding:11px 26px;border-radius:12px;font-weight:700;border:none;cursor:pointer;font-size:14px;transition:all .2s;}
+  .btn-primary:hover{background:#4f46e5;transform:translateY(-1px);box-shadow:0 8px 20px rgba(99,102,241,0.35);}
+  .card{background:white;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12);}
+  .tag{background:#f1f5f9;color:#475569;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;display:inline-block;}
+  .input-field{border:1px solid #e2e8f0;border-radius:12px;padding:11px 16px;font-size:15px;width:100%;outline:none;transition:border .2s;background:white;}
+  .input-field:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
+  .cat-card{background:white;border:2px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;}
+  .cat-card:hover{border-color:#6366f1;background:#f5f3ff;transform:translateY(-3px);}
+  .filter-btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569;transition:all .15s;}
+  .filter-btn:hover,.filter-btn.active-btn{background:#6366f1;color:white;border-color:#6366f1;}
+  .toast-box{position:fixed;bottom:24px;right:24px;background:#0f172a;color:white;padding:14px 22px;border-radius:12px;z-index:9999;box-shadow:0 8px 30px rgba(0,0,0,0.3);display:none;font-size:14px;font-weight:500;}
+  .star-filled{color:#f59e0b;}
+  .section-heading{font-size:2rem;font-weight:800;color:#0f172a;}
+  .section-sub{color:#64748b;margin-top:8px;font-size:1rem;}
+  .nav-link{color:#64748b;font-weight:600;font-size:14px;cursor:pointer;padding:6px 4px;border:none;background:none;transition:color .2s;}
+  .nav-link:hover{color:#6366f1;}
+  .back-link{color:#6366f1;font-size:14px;cursor:pointer;font-weight:600;background:none;border:none;padding:0;margin-bottom:20px;display:inline-flex;align-items:center;gap:4px;}
+  .back-link:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+    <div onclick="goHome()" style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+      <div style="width:38px;height:38px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">💼</div>
+      <span style="font-size:1.3rem;font-weight:800;color:#0f172a;">Freelance<span style="color:#6366f1;">Hub</span></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <button class="nav-link" onclick="goHome()">Home</button>
+      <button class="nav-link" onclick="goBrowse()">Browse</button>
+      <button class="nav-link" onclick="goHow()">How It Works</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button onclick="toast('Sign In جلد آئے گا!')" style="color:#6366f1;font-weight:700;background:none;border:none;cursor:pointer;font-size:14px;">Sign In</button>
+      <button class="btn-primary" onclick="toast('Sign Up جلد آئے گا!')">Join Now</button>
+    </div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast-box" id="toast-box"></div>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="pg-home">
+
+  <!-- Hero -->
+  <section style="padding-top:90px;padding-bottom:80px;background:linear-gradient(160deg,#f0f4ff,#faf0ff,#f0fdf4);">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="background:#ede9fe;color:#6366f1;display:inline-block;padding:6px 16px;border-radius:20px;font-weight:700;font-size:13px;margin-bottom:20px;">⚡ 50,000+ Projects Completed</div>
+      <h1 style="font-size:3.5rem;font-weight:900;line-height:1.1;color:#0f172a;margin-bottom:20px;max-width:700px;">
+        Find the perfect<br>
+        <span style="background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">freelance talent</span><br>
+        for your project.
+      </h1>
+      <p style="font-size:1.1rem;color:#64748b;margin-bottom:32px;max-width:520px;line-height:1.7;">Connect with top-rated professionals for design, development, marketing, and more.</p>
+
+      <div style="display:flex;gap:10px;max-width:580px;background:white;border-radius:16px;padding:8px;box-shadow:0 4px 30px rgba(0,0,0,0.08);border:1px solid #e2e8f0;margin-bottom:20px;">
+        <input id="hero-q" class="input-field" style="border:none;flex:1;padding:10px 14px;font-size:15px;" placeholder="What service are you looking for?"/>
+        <button class="btn-primary" onclick="heroSearch()">🔍 Search</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span style="color:#94a3b8;font-size:13px;font-weight:600;">Popular:</span>
+        <span class="tag" onclick="quickSearch('Web Design')" style="cursor:pointer;">Web Design</span>
+        <span class="tag" onclick="quickSearch('Logo Design')" style="cursor:pointer;">Logo Design</span>
+        <span class="tag" onclick="quickSearch('Mobile App')" style="cursor:pointer;">Mobile App</span>
+        <span class="tag" onclick="quickSearch('WordPress')" style="cursor:pointer;">WordPress</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div style="background:white;border-bottom:1px solid #f1f5f9;padding:24px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;">
+      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">50K+</div><div style="color:#64748b;font-size:13px;">Projects Done</div></div>
+      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">12K+</div><div style="color:#64748b;font-size:13px;">Freelancers</div></div>
+      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">4.9★</div><div style="color:#64748b;font-size:13px;">Avg Rating</div></div>
+      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">98%</div><div style="color:#64748b;font-size:13px;">Satisfaction</div></div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <section style="padding:80px 0;background:#fafafa;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-heading">Browse by Category</h2>
+        <p class="section-sub">Find experts across specialized domains</p>
+      </div>
+      <div id="home-cats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;"></div>
+    </div>
+  </section>
+
+  <!-- Featured Gigs -->
+  <section style="padding:80px 0;background:white;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
+        <div>
+          <h2 class="section-heading">Featured Services</h2>
+          <p class="section-sub">Top rated gigs from our best talent</p>
+        </div>
+        <button onclick="goBrowse()" style="color:#6366f1;font-weight:700;background:none;border:none;cursor:pointer;font-size:14px;">View All →</button>
+      </div>
+      <div id="home-gigs" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;"></div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section style="padding:80px 0;background:linear-gradient(135deg,#0f172a,#1e1b4b);">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;text-align:center;">
+      <h2 style="font-size:2rem;font-weight:800;color:white;margin-bottom:8px;">How FreelanceHub Works</h2>
+      <p style="color:#94a3b8;margin-bottom:56px;">Simple, fast, and completely secure.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;">
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">🔍</div>
+          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">1. Discover</h3>
+          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Browse thousands of professional services or post your project to receive proposals from top freelancers.</p>
+        </div>
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">💳</div>
+          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">2. Hire Safely</h3>
+          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Review profiles, compare ratings, and hire the best talent. Pay securely through our trusted escrow system.</p>
+        </div>
+        <div>
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">✅</div>
+          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">3. Approve & Pay</h3>
+          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Collaborate, review the work, and release payment only when you are 100% satisfied with the results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Freelancers -->
+  <section style="padding:80px 0;background:#fafafa;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-heading">Top Rated Freelancers</h2>
+        <p class="section-sub">Work with the best professionals in the industry</p>
+      </div>
+      <div id="home-freelancers" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section style="padding:80px 0;background:white;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <h2 class="section-heading">What Our Clients Say</h2>
+        <p class="section-sub">Real reviews from real people</p>
+      </div>
+      <div id="home-testimonials" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:80px 0;background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
+      <h2 style="font-size:2.5rem;font-weight:800;color:white;margin-bottom:16px;">Ready to start your next project?</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:40px;">Join thousands of businesses finding success with FreelanceHub.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="goBrowse()" style="background:white;color:#6366f1;padding:14px 36px;border-radius:12px;font-weight:800;border:none;cursor:pointer;font-size:1rem;transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Find Talent Now</button>
+        <button onclick="toast('Freelancer registration جلد آئے گا!')" style="background:rgba(255,255,255,0.15);color:white;padding:14px 36px;border-radius:12px;font-weight:700;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;">Become a Freelancer</button>
+      </div>
+    </div>
+  </section>
 </div>
 
-  </section>    <!-- Stats -->    <div style="background:white;border-bottom:1px solid #f1f5f9;padding:24px 0;">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;">  
-      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">50K+</div><div style="color:#64748b;font-size:13px;">Projects Done</div></div>  
-      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">12K+</div><div style="color:#64748b;font-size:13px;">Freelancers</div></div>  
-      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">4.9★</div><div style="color:#64748b;font-size:13px;">Avg Rating</div></div>  
-      <div><div style="font-size:1.8rem;font-weight:800;color:#6366f1;">98%</div><div style="color:#64748b;font-size:13px;">Satisfaction</div></div>  
-    </div>  
-  </div>    <!-- Categories -->    <section style="padding:80px 0;background:#fafafa;">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-      <div style="text-align:center;margin-bottom:48px;">  
-        <h2 class="section-heading">Browse by Category</h2>  
-        <p class="section-sub">Find experts across specialized domains</p>  
-      </div>  
-      <div id="home-cats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;"></div>  
-    </div>  
-  </section>    <!-- Featured Gigs -->    <section style="padding:80px 0;background:white;">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">  
-        <div>  
-          <h2 class="section-heading">Featured Services</h2>  
-          <p class="section-sub">Top rated gigs from our best talent</p>  
-        </div>  
-        <button onclick="goBrowse()" style="color:#6366f1;font-weight:700;background:none;border:none;cursor:pointer;font-size:14px;">View All →</button>  
-      </div>  
-      <div id="home-gigs" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;"></div>  
-    </div>  
-  </section>    <!-- How It Works -->    <section style="padding:80px 0;background:linear-gradient(135deg,#0f172a,#1e1b4b);">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;text-align:center;">  
-      <h2 style="font-size:2rem;font-weight:800;color:white;margin-bottom:8px;">How FreelanceHub Works</h2>  
-      <p style="color:#94a3b8;margin-bottom:56px;">Simple, fast, and completely secure.</p>  
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;">  
-        <div>  
-          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">🔍</div>  
-          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">1. Discover</h3>  
-          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Browse thousands of professional services or post your project to receive proposals from top freelancers.</p>  
-        </div>  
-        <div>  
-          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">💳</div>  
-          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">2. Hire Safely</h3>  
-          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Review profiles, compare ratings, and hire the best talent. Pay securely through our trusted escrow system.</p>  
-        </div>  
-        <div>  
-          <div style="width:80px;height:80px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;">✅</div>  
-          <h3 style="color:white;font-size:1.1rem;font-weight:700;margin-bottom:10px;">3. Approve & Pay</h3>  
-          <p style="color:#94a3b8;line-height:1.7;font-size:14px;">Collaborate, review the work, and release payment only when you are 100% satisfied with the results.</p>  
-        </div>  
-      </div>  
-    </div>  
-  </section>    <!-- Top Freelancers -->    <section style="padding:80px 0;background:#fafafa;">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-      <div style="text-align:center;margin-bottom:48px;">  
-        <h2 class="section-heading">Top Rated Freelancers</h2>  
-        <p class="section-sub">Work with the best professionals in the industry</p>  
-      </div>  
-      <div id="home-freelancers" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;"></div>  
-    </div>  
-  </section>    <!-- Testimonials -->    <section style="padding:80px 0;background:white;">  
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-      <div style="text-align:center;margin-bottom:48px;">  
-        <h2 class="section-heading">What Our Clients Say</h2>  
-        <p class="section-sub">Real reviews from real people</p>  
-      </div>  
-      <div id="home-testimonials" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;"></div>  
-    </div>  
-  </section>    <!-- CTA -->    <section style="padding:80px 0;background:linear-gradient(135deg,#6366f1,#8b5cf6);">  
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">  
-      <h2 style="font-size:2.5rem;font-weight:800;color:white;margin-bottom:16px;">Ready to start your next project?</h2>  
-      <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:40px;">Join thousands of businesses finding success with FreelanceHub.</p>  
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">  
-        <button onclick="goBrowse()" style="background:white;color:#6366f1;padding:14px 36px;border-radius:12px;font-weight:800;border:none;cursor:pointer;font-size:1rem;transition:all .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Find Talent Now</button>  
-        <button onclick="toast('Freelancer registration جلد آئے گا!')" style="background:rgba(255,255,255,0.15);color:white;padding:14px 36px;border-radius:12px;font-weight:700;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;">Become a Freelancer</button>  
-      </div>  
-    </div>  
-  </section>  
-</div>  <!-- ===== BROWSE PAGE ===== -->  <div class="page" id="pg-browse">  
-  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">  
-    <div style="max-width:1200px;margin:0 auto;padding:30px 24px 80px;">  
-      <h1 style="font-size:2rem;font-weight:800;color:#0f172a;margin-bottom:4px;">Explore Services</h1>  
-      <p style="color:#64748b;margin-bottom:24px;">Find the perfect freelancer for your project</p>  <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">  
-    <input id="search-q" class="input-field" style="flex:1;min-width:240px;" placeholder="Search services..." oninput="applyFilters()"/>  
-    <select id="sort-sel" onchange="applyFilters()" style="border:1px solid #e2e8f0;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:600;outline:none;background:white;cursor:pointer;">  
-      <option value="rating">Top Rated</option>  
-      <option value="price_asc">Price: Low to High</option>  
-      <option value="price_desc">Price: High to Low</option>  
-      <option value="newest">Newest</option>  
-    </select>  
-  </div>  
+<!-- ===== BROWSE PAGE ===== -->
+<div class="page" id="pg-browse">
+  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">
+    <div style="max-width:1200px;margin:0 auto;padding:30px 24px 80px;">
+      <h1 style="font-size:2rem;font-weight:800;color:#0f172a;margin-bottom:4px;">Explore Services</h1>
+      <p style="color:#64748b;margin-bottom:24px;">Find the perfect freelancer for your project</p>
 
-  <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;"></div>  
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <input id="search-q" class="input-field" style="flex:1;min-width:240px;" placeholder="Search services..." oninput="applyFilters()"/>
+        <select id="sort-sel" onchange="applyFilters()" style="border:1px solid #e2e8f0;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:600;outline:none;background:white;cursor:pointer;">
+          <option value="rating">Top Rated</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
 
-  <div style="display:flex;gap:24px;align-items:flex-start;">  
-    <aside style="width:210px;flex-shrink:0;">  
-      <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px;">  
-        <h3 style="font-weight:700;margin-bottom:16px;color:#0f172a;font-size:15px;">Budget ($)</h3>  
-        <input id="min-p" type="number" placeholder="Min" class="input-field" style="padding:9px 12px;font-size:13px;margin-bottom:10px;" oninput="applyFilters()"/>  
-        <input id="max-p" type="number" placeholder="Max" class="input-field" style="padding:9px 12px;font-size:13px;" oninput="applyFilters()"/>  
-        <button onclick="clearAll()" style="margin-top:16px;width:100%;padding:9px;border:1px solid #e2e8f0;border-radius:10px;font-size:13px;color:#64748b;cursor:pointer;background:white;font-weight:600;">Clear Filters</button>  
-      </div>  
-    </aside>  
-    <div style="flex:1;">  
-      <p id="result-count" style="color:#64748b;font-size:14px;margin-bottom:16px;"></p>  
-      <div id="gigs-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;"></div>  
-    </div>  
-  </div>  
+      <div id="cat-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;"></div>
+
+      <div style="display:flex;gap:24px;align-items:flex-start;">
+        <aside style="width:210px;flex-shrink:0;">
+          <div style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px;">
+            <h3 style="font-weight:700;margin-bottom:16px;color:#0f172a;font-size:15px;">Budget ($)</h3>
+            <input id="min-p" type="number" placeholder="Min" class="input-field" style="padding:9px 12px;font-size:13px;margin-bottom:10px;" oninput="applyFilters()"/>
+            <input id="max-p" type="number" placeholder="Max" class="input-field" style="padding:9px 12px;font-size:13px;" oninput="applyFilters()"/>
+            <button onclick="clearAll()" style="margin-top:16px;width:100%;padding:9px;border:1px solid #e2e8f0;border-radius:10px;font-size:13px;color:#64748b;cursor:pointer;background:white;font-weight:600;">Clear Filters</button>
+          </div>
+        </aside>
+        <div style="flex:1;">
+          <p id="result-count" style="color:#64748b;font-size:14px;margin-bottom:16px;"></p>
+          <div id="gigs-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-  </div>  
-</div>  <!-- ===== GIG DETAIL PAGE ===== -->  <div class="page" id="pg-gig">  
-  <div style="padding-top:90px;min-height:100vh;" id="gig-body"></div>  
-</div>  <!-- ===== FREELANCER PAGE ===== -->  <div class="page" id="pg-free">  
-  <div style="padding-top:80px;min-height:100vh;" id="free-body"></div>  
-</div>  <!-- ===== HOW IT WORKS PAGE ===== -->  <div class="page" id="pg-how">  
-  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">  
-    <div style="background:linear-gradient(135deg,#f5f3ff,#eef2ff);padding:70px 24px;text-align:center;border-bottom:1px solid #e2e8f0;">  
-      <h1 style="font-size:2.8rem;font-weight:900;color:#0f172a;margin-bottom:14px;">How FreelanceHub Works</h1>  
-      <p style="color:#64748b;font-size:1.1rem;max-width:540px;margin:0 auto;line-height:1.7;">Whether you need a logo, a website, or a video — we make it easy to get world-class work done.</p>  
-    </div>  
-    <div style="max-width:1000px;margin:0 auto;padding:60px 24px;">  
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:60px;">  
-        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">  
-          <div style="font-size:3rem;margin-bottom:16px;">📝</div>  
-          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">1. Post Your Project</h3>  
-          <p style="color:#64748b;line-height:1.7;font-size:14px;">Tell us what you need. Browse our catalog or post a custom project and let freelancers come to you.</p>  
-        </div>  
-        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">  
-          <div style="font-size:3rem;margin-bottom:16px;">🤝</div>  
-          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">2. Choose Your Expert</h3>  
-          <p style="color:#64748b;line-height:1.7;font-size:14px;">Review profiles, portfolios, and verified reviews. Interview your picks and choose the perfect match.</p>  
-        </div>  
-        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">  
-          <div style="font-size:3rem;margin-bottom:16px;">💎</div>  
-          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">3. Pay When Satisfied</h3>  
-          <p style="color:#64748b;line-height:1.7;font-size:14px;">Your payment is held securely in escrow. Release it only when the work meets your expectations.</p>  
-        </div>  
-      </div>  
-      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:24px;padding:52px;text-align:center;color:white;">  
-        <h2 style="font-size:1.8rem;font-weight:800;margin-bottom:14px;">🛡 Your Safety is Our Priority</h2>  
-        <p style="color:#94a3b8;margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;font-size:15px;">We provide a secure, transparent environment for both clients and freelancers.</p>  
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:580px;margin:0 auto;">  
-          <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">  
-            <div style="font-size:2rem;margin-bottom:10px;">🔒</div>  
-            <h4 style="font-weight:700;margin-bottom:8px;font-size:15px;">Secure Payments</h4>  
-            <p style="color:#94a3b8;font-size:13px;line-height:1.6;">Funds held in escrow. Released only after your full approval.</p>  
-          </div>  
-          <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">  
-            <div style="font-size:2rem;margin-bottom:10px;">⭐</div>  
-            <h4 style="font-weight:700;margin-bottom:8px;font-size:15px;">Verified Reviews</h4>  
-            <p style="color:#94a3b8;font-size:13px;line-height:1.6;">Every review is from a real client who completed a project.</p>  
-          </div>  
-        </div>  
-      </div>  
-      <div style="text-align:center;margin-top:56px;">  
-        <button class="btn-primary" onclick="goBrowse()" style="font-size:1rem;padding:14px 36px;">Find a Freelancer Now</button>  
-      </div>  
-    </div>  
-  </div>  
-</div>  <!-- FOOTER -->  <footer style="background:#0f172a;color:#94a3b8;padding:60px 0 32px;">  
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">  
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;">  
-      <div>  
-        <div onclick="goHome()" style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">  
-          <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-
+<!-- ===== GIG DETAIL PAGE ===== -->
+<div class="page" id="pg-gig">
+  <div style="padding-top:90px;min-height:100vh;" id="gig-body"></div>
+</div>
+
+<!-- ===== FREELANCER PAGE ===== -->
+<div class="page" id="pg-free">
+  <div style="padding-top:80px;min-height:100vh;" id="free-body"></div>
+</div>
+
+<!-- ===== HOW IT WORKS PAGE ===== -->
+<div class="page" id="pg-how">
+  <div style="padding-top:90px;min-height:100vh;background:#f8fafc;">
+    <div style="background:linear-gradient(135deg,#f5f3ff,#eef2ff);padding:70px 24px;text-align:center;border-bottom:1px solid #e2e8f0;">
+      <h1 style="font-size:2.8rem;font-weight:900;color:#0f172a;margin-bottom:14px;">How FreelanceHub Works</h1>
+      <p style="color:#64748b;font-size:1.1rem;max-width:540px;margin:0 auto;line-height:1.7;">Whether you need a logo, a website, or a video — we make it easy to get world-class work done.</p>
+    </div>
+    <div style="max-width:1000px;margin:0 auto;padding:60px 24px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:60px;">
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:16px;">📝</div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">1. Post Your Project</h3>
+          <p style="color:#64748b;line-height:1.7;font-size:14px;">Tell us what you need. Browse our catalog or post a custom project and let freelancers come to you.</p>
+        </div>
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:16px;">🤝</div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">2. Choose Your Expert</h3>
+          <p style="color:#64748b;line-height:1.7;font-size:14px;">Review profiles, portfolios, and verified reviews. Interview your picks and choose the perfect match.</p>
+        </div>
+        <div style="background:white;border-radius:20px;padding:36px 28px;text-align:center;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          <div style="font-size:3rem;margin-bottom:16px;">💎</div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:10px;">3. Pay When Satisfied</h3>
+          <p style="color:#64748b;line-height:1.7;font-size:14px;">Your payment is held securely in escrow. Release it only when the work meets your expectations.</p>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:24px;padding:52px;text-align:center;color:white;">
+        <h2 style="font-size:1.8rem;font-weight:800;margin-bottom:14px;">🛡 Your Safety is Our Priority</h2>
+        <p style="color:#94a3b8;margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;font-size:15px;">We provide a secure, transparent environment for both clients and freelancers.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:580px;margin:0 auto;">
+          <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:2rem;margin-bottom:10px;">🔒</div>
+            <h4 style="font-weight:700;margin-bottom:8px;font-size:15px;">Secure Payments</h4>
+            <p style="color:#94a3b8;font-size:13px;line-height:1.6;">Funds held in escrow. Released only after your full approval.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:2rem;margin-bottom:10px;">⭐</div>
+            <h4 style="font-weight:700;margin-bottom:8px;font-size:15px;">Verified Reviews</h4>
+            <p style="color:#94a3b8;font-size:13px;line-height:1.6;">Every review is from a real client who completed a project.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:56px;">
+        <button class="btn-primary" onclick="goBrowse()" style="font-size:1rem;padding:14px 36px;">Find a Freelancer Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#0f172a;color:#94a3b8;padding:60px 0 32px;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;">
+      <div>
+        <div onclick="goHome()" style="display:flex;align-items:center;gap:10px;margin-bottom:20px;cursor:pointer;">
+          <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;">💼</div>
+          <span style="font-size:1.2rem;font-weight:800;color:white;">Freelance<span style="color:#8b5cf6;">Hub</span></span>
+        </div>
+        <p style="color:#475569;line-height:1.7;max-width:260px;font-size:14px;">
+The ultimate platform to connect clients with top freelance talent worldwide.
+</p>
+</div>
+
+<div>
+  <h4 style="color:white;font-weight:700;margin-bottom:14px;">Company</h4>
+  <p>About</p>
+  <p>Careers</p>
+  <p>Blog</p>
+</div>
+
+<div>
+  <h4 style="color:white;font-weight:700;margin-bottom:14px;">Support</h4>
+  <p>Help Center</p>
+  <p>Contact</p>
+  <p>Privacy</p>
+</div>
+
+<div>
+  <h4 style="color:white;font-weight:700;margin-bottom:14px;">Services</h4>
+  <p>Design</p>
+  <p>Development</p>
+  <p>Marketing</p>
+</div>
+
+</div>
+
+<p style="text-align:center;color:#64748b;font-size:13px;">
+© 2026 FreelanceHub. All rights reserved.
+</p>
+</div>
+</footer>
+
+<!-- ✅ WORKING FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB3snZ1USDMTv609nL085JcSrmwazVkz5Q",
+  authDomain: "sweetu-g.firebaseapp.com",
+  projectId: "sweetu-g"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function toast(msg){
+  const t = document.getElementById("toast-box");
+  t.innerText = msg;
+  t.style.display = "block";
+  setTimeout(()=> t.style.display="none",3000);
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function goHome(){showPage("pg-home")}
+function goBrowse(){showPage("pg-browse")}
+function goHow(){showPage("pg-how")}
+
+function heroSearch(){
+  let q=document.getElementById("hero-q").value;
+  toast("Searching: "+q);
+  goBrowse();
+}
+
+function quickSearch(q){
+  document.getElementById("hero-q").value=q;
+  heroSearch();
+}
+
+function doSignup(){
+  let email = prompt("Enter Email");
+  let pass = prompt("Enter Password");
+
+  auth.createUserWithEmailAndPassword(email, pass)
+  .then(()=>toast("Account created ✅"))
+  .catch(e=>toast(e.message));
+}
+
+function doLogin(){
+  let email = prompt("Enter Email");
+  let pass = prompt("Enter Password");
+
+  auth.signInWithEmailAndPassword(email, pass)
+  .then(()=>toast("Login success ✅"))
+  .catch(e=>toast(e.message));
+}
+
+function logOut(){
+  auth.signOut().then(()=>toast("Logged out"));
+}
+
+function applyFilters(){toast("Filter applied")}
+function clearAll(){toast("Filters cleared")}
+</script>
+
+</body>
+ </html> 
