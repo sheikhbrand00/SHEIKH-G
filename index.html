@@ -1,244 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <title>Freelance Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kicks - Step Into Comfort</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
+      font-family: Arial;
+      margin: 0;
       background: #f5f5f5;
     }
 
-    /* Navbar */
     header {
-      background: #111;
+      background: #333;
       color: white;
-      padding: 15px 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      color: orange;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: orange;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 80vh;
-      background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff') no-repeat center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
+      padding: 15px;
       text-align: center;
     }
 
-    .hero h2 {
-      font-size: 50px;
-      margin-bottom: 20px;
+    .container {
+      padding: 20px;
     }
 
-    .hero button {
-      padding: 12px 25px;
+    input, select, button, textarea {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
       border: none;
-      background: orange;
-      color: white;
-      font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
-    }
-
-    /* Products */
-    .products {
-      padding: 50px;
-      text-align: center;
-    }
-
-    .products h2 {
-      margin-bottom: 30px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
     }
 
     .card {
       background: white;
       padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .card h3 {
       margin: 10px 0;
+      border-radius: 10px;
     }
 
-    .card p {
-      color: orange;
-      font-weight: bold;
-    }
-
-    .card button {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      background: black;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    /* About */
-    .about {
-      padding: 50px;
-      background: #111;
-      color: white;
-      text-align: center;
-    }
-
-    /* Footer */
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: black;
-      color: white;
-    }
-
-    /* Mobile */
-    @media(max-width: 768px) {
-      header {
-        flex-direction: column;
-      }
-
-      nav {
-        margin-top: 10px;
-      }
-
-      .hero h2 {
-        font-size: 30px;
-      }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>Kicks</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Men</a>
-      <a href="#">Women</a>
-      <a href="#">Sale</a>
-    </nav>
-  </header>
+<header>
+  <h1>Freelancing Website</h1>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div>
-      <h2>Step Into Comfort</h2>
-      <button onclick="shopNow()">Shop Now</button>
-    </div>
-  </section>
+<div class="container">
 
-  <!-- Products -->
-  <section class="products">
-    <h2>Featured Shoes</h2>
+  <!-- AUTH SECTION -->
+  <div id="auth">
+    <h2>Register</h2>
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <input id="password" placeholder="Password">
+    <select id="role">
+      <option value="client">Client</option>
+      <option value="freelancer">Freelancer</option>
+    </select>
+    <button onclick="register()">Register</button>
 
-    <div class="product-grid">
+    <h2>Login</h2>
+    <input id="lEmail" placeholder="Email">
+    <input id="lPassword" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba2">
-        <h3>Running Shoes</h3>
-        <p>$49</p>
-        <button onclick="addToCart()">Add to Cart</button>
-      </div>
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+    <h2>Dashboard</h2>
+    <button onclick="logout()">Logout</button>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1528701800489-20be3c3c35c7">
-        <h3>Casual Sneakers</h3>
-        <p>$59</p>
-        <button onclick="addToCart()">Add to Cart</button>
-      </div>
+    <h3>Post Project</h3>
+    <input id="title" placeholder="Project Title">
+    <textarea id="desc" placeholder="Description"></textarea>
+    <input id="budget" placeholder="Budget">
+    <button onclick="postProject()">Post Project</button>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a">
-        <h3>Sport Shoes</h3>
-        <p>$69</p>
-        <button onclick="addToCart()">Add to Cart</button>
-      </div>
+    <h3>All Projects</h3>
+    <div id="projects"></div>
+  </div>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1519744346363-dc1d5f1e61f0">
-        <h3>Fashion Shoes</h3>
-        <p>$79</p>
-        <button onclick="addToCart()">Add to Cart</button>
-      </div>
+</div>
 
-    </div>
-  </section>
+<script>
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  <!-- About -->
-  <section class="about">
-    <h2>Why Choose Us?</h2>
-    <p>High quality shoes, best prices, and fast delivery. Step into style with Kicks.</p>
-  </section>
+  function saveData() {
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  }
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 Kicks Store | All Rights Reserved</p>
-  </footer>
+  function register() {
+    const user = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      role: role.value
+    };
 
-  <!-- JavaScript -->
-  <script>
-    function addToCart() {
-      alert("Item added to cart!");
+    users.push(user);
+    saveData();
+    alert("Registered Successfully!");
+  }
+
+  function login() {
+    const user = users.find(u => u.email === lEmail.value && u.password === lPassword.value);
+
+    if (user) {
+      currentUser = user;
+      saveData();
+      showDashboard();
+    } else {
+      alert("Login Failed");
     }
+  }
 
-    function shopNow() {
-      alert("Scroll down to shop!");
-      window.scrollTo({
-        top: document.querySelector(".products").offsetTop,
-        behavior: "smooth"
-      });
-    }
-  </script>
+  function logout() {
+    currentUser = null;
+    saveData();
+    location.reload();
+  }
+
+  function showDashboard() {
+    document.getElementById("auth").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+    loadProjects();
+  }
+
+  function postProject() {
+    const project = {
+      title: title.value,
+      description: desc.value,
+      budget: budget.value,
+      client: currentUser.email
+    };
+
+    projects.push(project);
+    saveData();
+    loadProjects();
+  }
+
+  function loadProjects() {
+    const container = document.getElementById("projects");
+
+    container.innerHTML = projects.map(p => `
+      <div class="card">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <p><b>Budget:</b> ${p.budget}</p>
+        <p><b>Client:</b> ${p.client}</p>
+        ${currentUser.role === "freelancer" ? `<button onclick="bid('${p.title}')">Bid</button>` : ""}
+      </div>
+    `).join("");
+  }
+
+  function bid(title) {
+    alert("Bid sent on: " + title);
+  }
+
+  // Auto login check
+  if (currentUser) {
+    showDashboard();
+  }
+</script>
 
 </body>
-   </html>
+  </html>
